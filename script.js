@@ -1,24 +1,24 @@
 const regions = [
-  { id: "abai", name: "Абайская", snp: 146, built: 95, plan: 62, status: "ahead", x: 675, y: 242, w: 120, h: 86 },
-  { id: "akmola", name: "Акмолинская", snp: 226, built: 145, plan: 65, status: "ontrack", x: 365, y: 120, w: 140, h: 92 },
-  { id: "aktobe", name: "Актюбинская", snp: 184, built: 96, plan: 61, status: "behind", x: 145, y: 222, w: 148, h: 112 },
-  { id: "almaty", name: "Алматинская", snp: 211, built: 144, plan: 64, status: "ahead", x: 588, y: 388, w: 142, h: 82 },
-  { id: "atyrau", name: "Атырауская", snp: 94, built: 67, plan: 61, status: "ahead", x: 28, y: 326, w: 115, h: 84 },
-  { id: "west", name: "ЗКО", snp: 127, built: 71, plan: 57, status: "ontrack", x: 18, y: 214, w: 116, h: 94 },
-  { id: "zhambyl", name: "Жамбылская", snp: 168, built: 101, plan: 62, status: "ontrack", x: 470, y: 432, w: 110, h: 74 },
-  { id: "zhetysu", name: "Жетысу", snp: 147, built: 80, plan: 59, status: "behind", x: 728, y: 350, w: 100, h: 86 },
-  { id: "karaganda", name: "Карагандинская", snp: 232, built: 161, plan: 66, status: "ahead", x: 418, y: 235, w: 172, h: 135 },
-  { id: "kostanay", name: "Костанайская", snp: 201, built: 123, plan: 61, status: "ontrack", x: 222, y: 92, w: 132, h: 106 },
-  { id: "kyzylorda", name: "Кызылординская", snp: 133, built: 65, plan: 60, status: "behind", x: 264, y: 390, w: 165, h: 78 },
-  { id: "mangystau", name: "Мангистауская", snp: 80, built: 54, plan: 58, status: "ahead", x: 70, y: 420, w: 120, h: 80 },
-  { id: "pavlodar", name: "Павлодарская", snp: 158, built: 106, plan: 63, status: "ahead", x: 550, y: 104, w: 120, h: 88 },
-  { id: "north", name: "СКО", snp: 179, built: 102, plan: 59, status: "ontrack", x: 365, y: 25, w: 132, h: 78 },
-  { id: "turkistan", name: "Туркестанская", snp: 342, built: 149, plan: 60, status: "behind", x: 365, y: 474, w: 118, h: 82 },
-  { id: "ulytau", name: "Ұлытау", snp: 104, built: 62, plan: 57, status: "ontrack", x: 320, y: 302, w: 98, h: 82 },
-  { id: "east", name: "ВКО", snp: 178, built: 117, plan: 62, status: "ahead", x: 804, y: 205, w: 116, h: 108 },
-  { id: "shymkent", name: "Шымкент", snp: 49, built: 32, plan: 65, status: "ontrack", x: 500, y: 520, w: 80, h: 48 },
-  { id: "astana", name: "Астана", snp: 41, built: 29, plan: 66, status: "ahead", x: 515, y: 184, w: 72, h: 48 },
-  { id: "almaty-city", name: "Алматы", snp: 18, built: 15, plan: 82, status: "ontrack", x: 700, y: 475, w: 70, h: 46 }
+  { id: "abai", name: "Абайская", snp: 146, built: 95, plan: 62, status: "ahead", x: 675, y: 242, w: 120, h: 86, cx: 755, cy: 330 },
+  { id: "akmola", name: "Акмолинская", snp: 226, built: 145, plan: 65, status: "ontrack", x: 365, y: 120, w: 140, h: 92, cx: 470, cy: 235 },
+  { id: "aktobe", name: "Актюбинская", snp: 184, built: 96, plan: 61, status: "behind", x: 145, y: 222, w: 148, h: 112, cx: 250, cy: 330 },
+  { id: "almaty", name: "Алматинская", snp: 211, built: 144, plan: 64, status: "ahead", x: 588, y: 388, w: 142, h: 82, cx: 690, cy: 455 },
+  { id: "atyrau", name: "Атырауская", snp: 94, built: 67, plan: 61, status: "ahead", x: 28, y: 326, w: 115, h: 84, cx: 135, cy: 370 },
+  { id: "west", name: "ЗКО", snp: 127, built: 71, plan: 57, status: "ontrack", x: 18, y: 214, w: 116, h: 94, cx: 125, cy: 285 },
+  { id: "zhambyl", name: "Жамбылская", snp: 168, built: 101, plan: 62, status: "ontrack", x: 470, y: 432, w: 110, h: 74, cx: 585, cy: 470 },
+  { id: "zhetysu", name: "Жетысу", snp: 147, built: 80, plan: 59, status: "behind", x: 728, y: 350, w: 100, h: 86, cx: 785, cy: 435 },
+  { id: "karaganda", name: "Карагандинская", snp: 232, built: 161, plan: 66, status: "ahead", x: 418, y: 235, w: 172, h: 135, cx: 540, cy: 345 },
+  { id: "kostanay", name: "Костанайская", snp: 201, built: 123, plan: 61, status: "ontrack", x: 222, y: 92, w: 132, h: 106, cx: 330, cy: 205 },
+  { id: "kyzylorda", name: "Кызылординская", snp: 133, built: 65, plan: 60, status: "behind", x: 264, y: 390, w: 165, h: 78, cx: 395, cy: 430 },
+  { id: "mangystau", name: "Мангистауская", snp: 80, built: 54, plan: 58, status: "ahead", x: 70, y: 420, w: 120, h: 80, cx: 185, cy: 455 },
+  { id: "pavlodar", name: "Павлодарская", snp: 158, built: 106, plan: 63, status: "ahead", x: 550, y: 104, w: 120, h: 88, cx: 645, cy: 220 },
+  { id: "north", name: "СКО", snp: 179, built: 102, plan: 59, status: "ontrack", x: 365, y: 25, w: 132, h: 78, cx: 455, cy: 120 },
+  { id: "turkistan", name: "Туркестанская", snp: 342, built: 149, plan: 60, status: "behind", x: 365, y: 474, w: 118, h: 82, cx: 490, cy: 505 },
+  { id: "ulytau", name: "Ұлытау", snp: 104, built: 62, plan: 57, status: "ontrack", x: 320, y: 302, w: 98, h: 82, cx: 395, cy: 345 },
+  { id: "east", name: "ВКО", snp: 178, built: 117, plan: 62, status: "ahead", x: 804, y: 205, w: 116, h: 108, cx: 850, cy: 320 },
+  { id: "shymkent", name: "Шымкент", snp: 49, built: 32, plan: 65, status: "ontrack", x: 500, y: 520, w: 80, h: 48, cx: 595, cy: 530 },
+  { id: "astana", name: "Астана", snp: 41, built: 29, plan: 66, status: "ahead", x: 515, y: 184, w: 72, h: 48, cx: 575, cy: 270 },
+  { id: "almaty-city", name: "Алматы", snp: 18, built: 15, plan: 82, status: "ontrack", x: 700, y: 475, w: 70, h: 46, cx: 760, cy: 515 }
 ];
 
 const technologies = [
@@ -47,7 +47,7 @@ const statusColor = {
   behind: "#c45137"
 };
 
-const REGION_RADIUS = 52;
+const REGION_RADIUS = 44;
 const mapLabels = {
   abai: "Абай",
   akmola: "Акмола",
@@ -102,6 +102,7 @@ function buildMap() {
   const outline = document.createElementNS("http://www.w3.org/2000/svg", "path");
   outline.setAttribute("class", "kazakhstan-outline");
   outline.setAttribute("d", "M554.8 415.5 L542.8 419.4 L515.1 434.0 L506.0 449.0 L498.2 449.1 L492.5 439.2 L465.8 438.5 L461.6 421.4 L451.4 421.2 L452.9 400.2 L427.9 384.9 L392.0 386.6 L367.4 389.6 L347.4 370.7 L330.3 362.8 L297.9 347.8 L294.0 346.0 L240.1 358.4 L240.9 435.6 L230.2 436.6 L215.5 420.2 L201.4 414.3 L177.6 418.7 L168.3 425.6 L167.2 420.5 L172.3 411.8 L168.3 404.5 L144.1 397.4 L134.6 378.6 L123.1 373.3 L122.4 366.5 L142.7 368.5 L143.5 353.1 L161.3 349.7 L179.6 352.9 L183.4 332.5 L179.7 319.5 L158.7 320.5 L140.9 315.4 L116.7 324.6 L97.2 329.0 L86.5 325.6 L88.6 314.8 L75.3 300.9 L59.8 301.4 L42.0 287.2 L54.1 271.4 L48.0 267.1 L64.7 244.1 L86.2 256.3 L88.8 241.0 L132.0 218.2 L164.7 217.7 L210.8 232.2 L235.6 240.6 L257.8 231.8 L291.0 231.4 L317.8 242.2 L323.9 236.0 L353.3 236.9 L358.5 227.0 L324.6 212.6 L344.7 202.4 L340.8 196.7 L360.9 191.3 L345.8 176.9 L355.4 169.8 L433.7 162.5 L443.9 157.3 L496.3 149.6 L515.1 140.9 L552.7 145.4 L559.3 167.1 L581.2 162.0 L608.1 169.2 L606.3 180.6 L626.4 179.4 L678.9 159.6 L671.2 166.2 L697.9 182.4 L744.7 235.5 L755.8 224.6 L784.7 236.6 L814.8 231.3 L826.3 235.0 L836.4 247.1 L851.0 251.2 L859.9 260.1 L886.9 257.3 L898.0 270.1 L882.1 284.0 L864.7 286.0 L863.7 306.9 L852.0 316.4 L810.5 309.5 L795.4 347.0 L784.7 351.7 L743.2 360.0 L762.1 396.4 L747.7 401.8 L749.4 413.8 L736.5 410.7 L726.0 403.2 L694.9 401.0 L660.2 400.4 L652.6 402.7 L622.8 393.9 L610.9 398.2 L607.7 410.6 L573.2 403.4 L559.4 406.3 L554.8 415.5 Z");
+  outline.setAttribute("transform", "translate(0 -170) scale(1 1.55)");
   svg.appendChild(outline);
 
   regions.forEach(region => {
@@ -109,8 +110,8 @@ function buildMap() {
     group.dataset.status = region.status;
     group.dataset.name = region.name.toLowerCase();
 
-    const cx = region.x + region.w / 2;
-    const cy = region.y + region.h / 2;
+    const cx = region.cx ?? region.x + region.w / 2;
+    const cy = region.cy ?? region.y + region.h / 2;
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     circle.setAttribute("cx", cx);
     circle.setAttribute("cy", cy);
