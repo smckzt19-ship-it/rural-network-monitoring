@@ -13,7 +13,7 @@ const regions = [
   { id: "mangystau", name: "Мангистауская", snp: 80, built: 54, plan: 58, status: "ahead", x: 70, y: 420, w: 120, h: 80 },
   { id: "pavlodar", name: "Павлодарская", snp: 158, built: 106, plan: 63, status: "ahead", x: 550, y: 104, w: 120, h: 88 },
   { id: "north", name: "СКО", snp: 179, built: 102, plan: 59, status: "ontrack", x: 365, y: 25, w: 132, h: 78 },
-  { id: "turkistan", name: "Туркестанская", snp: 324, built: 149, plan: 60, status: "behind", x: 365, y: 474, w: 118, h: 82 },
+  { id: "turkistan", name: "Туркестанская", snp: 342, built: 149, plan: 60, status: "behind", x: 365, y: 474, w: 118, h: 82 },
   { id: "ulytau", name: "Ұлытау", snp: 104, built: 62, plan: 57, status: "ontrack", x: 320, y: 302, w: 98, h: 82 },
   { id: "east", name: "ВКО", snp: 178, built: 117, plan: 62, status: "ahead", x: 804, y: 205, w: 116, h: 108 },
   { id: "shymkent", name: "Шымкент", snp: 49, built: 32, plan: 65, status: "ontrack", x: 500, y: 520, w: 80, h: 48 },
