@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мониторинг строительства оптических сетей</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="topbar" aria-label="Сводка проекта">
+      <div>
+        <p class="eyebrow">Республика Казахстан</p>
+        <h1>Мониторинг строительства сетей в сельских населенных пунктах</h1>
+      </div>
+      <div class="top-actions">
+        <button class="icon-button active" title="Дашборд" aria-label="Дашборд">
+          <span aria-hidden="true">▦</span>
+        </button>
+        <button class="icon-button" title="Экспорт" aria-label="Экспорт">
+          <span aria-hidden="true">⇩</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="summary-grid" aria-label="Ключевые показатели">
+      <article class="metric-card">
+        <span class="metric-label">Всего СНП в проекте</span>
+        <strong id="total-settlements">0</strong>
+        <small>20 регионов, 3000 населенных пунктов</small>
+      </article>
+      <article class="metric-card">
+        <span class="metric-label">Сети построены</span>
+        <strong id="built-total">0</strong>
+        <small><span id="built-share">0%</span> от общего объема</small>
+      </article>
+      <article class="metric-card">
+        <span class="metric-label">Опережаем график</span>
+        <strong id="ahead-total">0</strong>
+        <small>регионов с положительным отклонением</small>
+      </article>
+      <article class="metric-card alert">
+        <span class="metric-label">Зоны внимания</span>
+        <strong id="behind-total">0</strong>
+        <small>регионов с риском отставания</small>
+      </article>
+    </section>
+
+    <section class="control-strip" aria-label="Фильтры">
+      <div class="segmented" role="tablist" aria-label="Фильтр по статусу">
+        <button class="segment active" data-filter="all">Все</button>
+        <button class="segment" data-filter="ahead">Опережаем</button>
+        <button class="segment" data-filter="ontrack">По графику</button>
+        <button class="segment" data-filter="behind">Отстаем</button>
+      </div>
+      <label class="search-box">
+        <span aria-hidden="true">⌕</span>
+        <input id="region-search" type="search" placeholder="Найти регион">
+      </label>
+    </section>
+
+    <section class="dashboard-grid">
+      <section class="panel map-panel" aria-label="Карта регионов">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Региональный разрез</p>
+            <h2>Статус строительства</h2>
+          </div>
+          <div class="legend">
+            <span><i class="dot ahead"></i>Опережаем</span>
+            <span><i class="dot ontrack"></i>По графику</span>
+            <span><i class="dot behind"></i>Отстаем</span>
+          </div>
+        </div>
+        <div class="kaz-map" id="kaz-map" aria-label="Схематичная карта Казахстана"></div>
+      </section>
+
+      <section class="panel tech-panel" aria-label="Технологии строительства">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Технологии</p>
+            <h2>Построенные сети</h2>
+          </div>
+        </div>
+        <div class="donut-wrap">
+          <div class="donut" id="tech-donut" aria-hidden="true"></div>
+          <div class="donut-center">
+            <strong id="donut-total">0</strong>
+            <span>СНП подключено</span>
+          </div>
+        </div>
+        <div class="tech-list" id="tech-list"></div>
+      </section>
+
+      <section class="panel stages-panel" aria-label="Этапы строительно-монтажных работ">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">СМР</p>
+            <h2>Этапы и сроки</h2>
+          </div>
+          <span class="pill">Среднее по проекту</span>
+        </div>
+        <div class="stage-list" id="stage-list"></div>
+      </section>
+
+      <section class="panel regions-panel" aria-label="Таблица регионов">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Детализация</p>
+            <h2>Регионы</h2>
+          </div>
+          <span class="pill" id="shown-count">0 регионов</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Регион</th>
+                <th>СНП</th>
+                <th>Построено</th>
+                <th>Прогресс</th>
+                <th>Отклонение</th>
+                <th>Статус</th>
+              </tr>
+            </thead>
+            <tbody id="regions-table"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
