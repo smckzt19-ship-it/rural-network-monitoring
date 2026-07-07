@@ -99,6 +99,11 @@ function buildMap() {
   svg.setAttribute("viewBox", "0 0 940 590");
   svg.setAttribute("role", "img");
 
+  const outline = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  outline.setAttribute("class", "kazakhstan-outline");
+  outline.setAttribute("d", "M45 304 L88 232 L156 195 L235 118 L337 76 L448 72 L555 96 L657 79 L743 122 L842 176 L905 265 L883 345 L821 414 L726 456 L625 518 L501 523 L408 489 L311 509 L219 470 L132 433 L61 370 Z");
+  svg.appendChild(outline);
+
   regions.forEach(region => {
     const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
     group.dataset.status = region.status;

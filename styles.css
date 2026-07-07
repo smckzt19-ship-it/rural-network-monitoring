@@ -284,6 +284,14 @@ h2 {
   display: block;
 }
 
+.kazakhstan-outline {
+  fill: rgba(232, 240, 235, 0.78);
+  stroke: rgba(104, 115, 109, 0.32);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
 .region-shape {
   stroke: #ffffff;
   stroke-width: 5;
