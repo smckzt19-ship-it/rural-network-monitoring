@@ -523,7 +523,7 @@ tbody tr:hover {
 
 @media (max-width: 760px) {
   .app-shell {
-    width: min(100% - 20px, 1480px);
+    width: min(100% - 16px, 1480px);
     padding-top: 12px;
   }
 
@@ -534,9 +534,43 @@ tbody tr:hover {
     flex-direction: column;
   }
 
+  .topbar {
+    gap: 14px;
+    padding-bottom: 14px;
+  }
+
+  h1 {
+    max-width: 100%;
+    font-size: 30px;
+    line-height: 1.12;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  .top-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
   .summary-grid,
   .dashboard-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .metric-card {
+    min-height: 112px;
+    padding: 16px;
+  }
+
+  .metric-card strong {
+    font-size: 34px;
+  }
+
+  .panel {
+    padding: 14px;
   }
 
   .segmented {
@@ -552,13 +586,77 @@ tbody tr:hover {
     width: 100%;
   }
 
-  .kaz-map,
+  .legend {
+    justify-content: flex-start;
+  }
+
+  .map-panel {
+    min-height: auto;
+  }
+
+  .kaz-map {
+    min-height: 430px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .kaz-map svg {
-    min-height: 540px;
+    width: 760px;
+    max-width: none;
+    min-height: 430px;
   }
 
   .donut-wrap {
-    width: 210px;
-    height: 210px;
+    width: 196px;
+    height: 196px;
+    margin-top: 2px;
+  }
+
+  .donut::after {
+    inset: 31px;
+  }
+
+  .donut-center {
+    inset: 52px;
+  }
+
+  .donut-center strong {
+    font-size: 30px;
+  }
+
+  .tech-row-top,
+  .stage-row-top,
+  .stage-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  table {
+    min-width: 760px;
+  }
+}
+
+@media (max-width: 420px) {
+  h1 {
+    font-size: 25px;
+  }
+
+  .metric-card strong {
+    font-size: 31px;
+  }
+
+  .segment {
+    padding: 0 12px;
+  }
+
+  .kaz-map svg {
+    width: 700px;
+  }
+
+  .region-label,
+  .region-caption {
+    font-size: 11px;
   }
 }
