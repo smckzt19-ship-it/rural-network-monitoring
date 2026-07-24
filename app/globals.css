@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  background: #f5f7f9;
+}
+
+.dashboard-frame,
+.dashboard-frame iframe {
+  width: 100%;
+  min-height: 100vh;
+  border: 0;
+}
+
+.dashboard-frame {
+  display: flex;
+}
+
+.dashboard-frame iframe {
+  flex: 1;
+}
