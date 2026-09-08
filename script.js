@@ -42,22 +42,9 @@ const designers = ["GeoProject KZ", "Alem Design", "Nomad Project", "Sigma PIR",
 const types = ["Макро", "Транспортная", "Узловая", "Приграничная", "Сельская"];
 const risks = ["", "Риск задержки поставки", "Требуется акт приемки", "Нет фактической стоимости", "Нет подрядчика", "Без плановой даты завершения"];
 
-const areaCoordinates = {
-  "Акмолинская область": [52.05, 69.25], "Костанайская область": [52.15, 63.62],
-  "Павлодарская область": [52.25, 76.95], "Туркестанская область": [43.30, 68.25],
-  "Жамбылская область": [42.90, 71.37], "Кызылординская область": [44.85, 65.50],
-  "Атырауская область": [47.10, 51.92], "Мангистауская область": [43.65, 52.80],
-  "Актюбинская область": [50.28, 57.17], "Восточно-Казахстанская область": [49.95, 82.62],
-  "Абайская область": [50.41, 80.25], "Карагандинская область": [49.80, 73.10],
-  "Улытауская область": [47.80, 67.71], "Алматинская область": [43.50, 77.25],
-  "Жетысуская область": [45.02, 78.37]
-};
-
 let stations = createMockStations();
 let filteredStations = [...stations];
 let sortState = { key: "stationId", direction: "asc" };
-let stationMap;
-let mapMarkers;
 
 function formatNumber(value) {
   return new Intl.NumberFormat("ru-RU").format(Math.round(value || 0));
@@ -128,9 +115,6 @@ function createMockStations() {
       const readiness = stageMeta[stage].weight + (stage === "СМР в работе" ? (counter % 12) : 0);
       const hasOverrun = contractDelta < 0 || finalEconomy < 0;
       const risk = delayDays > 0 ? "Есть отставание" : hasOverrun ? "Есть перерасход" : risks[counter % risks.length];
-      const origin = areaCoordinates[region[1]];
-      const latitude = origin[0] + ((((counter * 37) % 100) - 50) / 155);
-      const longitude = origin[1] + ((((counter * 53) % 100) - 50) / 105);
 
       rows.push({
         stationId: `AMS-${String(counter).padStart(3, "0")}`,
@@ -139,8 +123,6 @@ function createMockStations() {
         area: region[1],
         locality: region[2][counter % region[2].length],
         address: `${region[2][counter % region[2].length]}, промышленная зона ${1 + (counter % 9)}`,
-        latitude,
-        longitude,
         type: types[counter % types.length],
         status,
         stage,
@@ -255,42 +237,7 @@ function renderAll() {
   renderTimelineChart();
   renderBudgetChart();
   renderProblemList();
-  renderMap();
   renderTable();
-}
-
-function initMap() {
-  if (!window.L || stationMap) return;
-  stationMap = L.map("station-map", { zoomControl: true, scrollWheelZoom: false }).setView([48.1, 67.2], 5);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 18,
-    attribution: "© OpenStreetMap"
-  }).addTo(stationMap);
-  mapMarkers = L.layerGroup().addTo(stationMap);
-}
-
-function renderMap() {
-  setText("map-count", `${filteredStations.length} объектов`);
-  initMap();
-  if (!stationMap || !mapMarkers) return;
-  mapMarkers.clearLayers();
-  const bounds = [];
-  filteredStations.forEach(item => {
-    if (!Number.isFinite(item.latitude) || !Number.isFinite(item.longitude)) return;
-    const marker = L.circleMarker([item.latitude, item.longitude], {
-      radius: filteredStations.length > 180 ? 5 : 7,
-      color: "#ffffff",
-      weight: 1.5,
-      fillColor: statuses[item.status].color,
-      fillOpacity: .88
-    });
-    marker.bindTooltip(`<strong>${item.name}</strong><br>${item.locality} · ${statuses[item.status].label}<br>Готовность ${item.readiness}%`, { direction: "top" });
-    marker.on("click", () => showStation(item.stationId));
-    marker.addTo(mapMarkers);
-    bounds.push([item.latitude, item.longitude]);
-  });
-  if (bounds.length) stationMap.fitBounds(bounds, { padding: [24, 24], maxZoom: 8 });
-  window.setTimeout(() => stationMap.invalidateSize(), 60);
 }
 
 function getTotals(rows) {
@@ -501,7 +448,7 @@ function showStation(id) {
   if (!item) return;
   document.querySelector("#dialog-title").textContent = `${item.stationId} · ${item.name}`;
   document.querySelector("#dialog-content").innerHTML = `
-    ${detailCard("Общая информация", [`Регион: ${item.region}`, `Область: ${item.area}`, `Населенный пункт: ${item.locality}`, `Адрес: ${item.address}`, `Координаты: ${item.latitude.toFixed(5)}, ${item.longitude.toFixed(5)}`, `<a class="geo-link" href="https://www.openstreetmap.org/?mlat=${item.latitude}&mlon=${item.longitude}#map=13/${item.latitude}/${item.longitude}" target="_blank" rel="noopener">Открыть геолокацию ↗</a>`, `Тип станции: ${item.type}`])}
+    ${detailCard("Общая информация", [`Регион: ${item.region}`, `Область: ${item.area}`, `Населенный пункт: ${item.locality}`, `Адрес: ${item.address}`, `Тип станции: ${item.type}`])}
     ${detailCard("История этапов", [`Текущий статус: ${statuses[item.status].label}`, `Этап: ${item.stage}`, `Год включения: ${item.programYear}`, `Готовность: ${item.readiness}%`])}
     ${detailCard("Финансы", [`Плановая сумма СМР: ${formatMoney(item.planAmount)}`, `Договорная сумма СМР: ${formatMoney(item.contractAmount)}`, `Фактическая сумма СМР: ${formatMoney(item.factAmount)}`, `Экономия к плану: ${formatMoney(item.economyToPlan)}`, `Отклонение от договора: ${formatMoney(item.contractDelta)}`])}
     ${detailCard("Сроки", [`План начала: ${item.planStart || "Нет"}`, `План завершения: ${item.planFinish || "Нет"}`, `Факт начала: ${item.actualStart || "Нет"}`, `Факт завершения: ${item.actualFinish || "Нет"}`, `Отставание: ${item.delayDays} дней`])}
@@ -582,8 +529,6 @@ function normalizeUploadedRow(row, index) {
     area: row[3] || "Не указано",
     locality: row[4] || "",
     address: row[5] || "",
-    latitude: Number(row[30]) || (areaCoordinates[row[3]]?.[0] ?? 48.1) + (((index * 37) % 100 - 50) / 155),
-    longitude: Number(row[31]) || (areaCoordinates[row[3]]?.[1] ?? 67.2) + (((index * 53) % 100 - 50) / 105),
     type: "Макро",
     status,
     stage,
