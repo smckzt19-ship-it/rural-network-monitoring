@@ -4,15 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Мониторинг капитального ремонта АМС</title>
+  <link rel="preconnect" href="https://tile.openstreetmap.org">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynhDpZRMCeFqJp4YI8EZ9uw2J5wM=" crossorigin="">
   <link rel="stylesheet" href="styles.css?v=ams-459">
 </head>
 <body>
   <div class="app-shell">
     <header class="topbar">
-      <div>
-        <p class="eyebrow">Корпоративный аналитический портал</p>
-        <h1>Мониторинг капитального ремонта АМС</h1>
-      </div>
+      <div class="brand-mark"><span>АМС</span><small>Контроль программы</small></div>
       <div class="top-actions">
         <label class="file-button" title="Загрузить CSV">
           <span>Загрузить</span>
@@ -68,6 +67,13 @@
       </aside>
 
       <section class="content">
+        <section class="overview-grid">
+          <article class="intro-panel">
+            <p class="eyebrow">Капитальный ремонт · 2024–2026</p>
+            <h1>Мониторинг<br>капитального<br>ремонта АМС</h1>
+            <p class="intro-stat"><strong>459</strong> станций <span>·</span> единая картина проекта</p>
+            <div class="intro-route" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
         <section class="kpi-grid" aria-label="Ключевые показатели">
           <article class="kpi-card"><span>Всего станций</span><strong id="kpi-total">0</strong><small>полный реестр программы</small></article>
           <article class="kpi-card done"><span>Выполнено</span><strong id="kpi-done">0</strong><small id="kpi-done-share">0%</small></article>
@@ -80,8 +86,27 @@
           <article class="kpi-card risk"><span>С отставанием</span><strong id="kpi-delayed">0</strong><small id="kpi-average-delay">среднее отставание</small></article>
           <article class="kpi-card ok"><span>Сроки в норме</span><strong id="kpi-on-time">0</strong><small>без просрочки</small></article>
         </section>
+        </section>
 
         <section class="analytics-grid">
+          <article class="panel map-panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">География программы</p>
+                <h2>Карта расположения АМС</h2>
+              </div>
+              <span id="map-count" class="pill">0 объектов</span>
+            </div>
+            <div class="map-layout">
+              <div id="station-map" aria-label="Интерактивная карта расположения станций"></div>
+              <div class="map-legend" aria-label="Легенда карты">
+                <span><i class="done"></i>Выполнено</span>
+                <span><i class="active"></i>В работе</span>
+                <span><i class="wait"></i>В ожидании</span>
+                <span class="map-hint">Нажмите на маркер, чтобы открыть карточку станции</span>
+              </div>
+            </div>
+          </article>
           <article class="panel wide">
             <div class="panel-head">
               <div>
@@ -219,6 +244,7 @@
     <div id="dialog-content" class="dialog-content"></div>
   </dialog>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
   <script src="script.js?v=ams-459"></script>
 </body>
