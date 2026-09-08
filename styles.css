@@ -289,6 +289,29 @@ h2 { font-size: 19px; line-height: 1.2; }
 }
 
 .table-wrap { overflow: auto; max-height: 560px; border: 1px solid var(--line); border-radius: 8px; }
+.registry-count {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: #e5f0fb;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 800;
+}
+.registry-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 12px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.registry-pagination { display: flex; align-items: center; gap: 10px; }
+.registry-pagination .ghost-button:disabled { opacity: .45; cursor: default; }
+.table-empty { padding: 34px 16px; color: var(--muted); text-align: center; }
 table { width: 100%; min-width: 1320px; border-collapse: collapse; }
 th, td {
   padding: 11px 10px;

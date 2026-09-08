@@ -45,6 +45,8 @@ const risks = ["", "Риск задержки поставки", "Требует
 let stations = createMockStations();
 let filteredStations = [...stations];
 let sortState = { key: "stationId", direction: "asc" };
+let registryPage = 1;
+const REGISTRY_PAGE_SIZE = 50;
 
 function formatNumber(value) {
   return new Intl.NumberFormat("ru-RU").format(Math.round(value || 0));
@@ -213,6 +215,7 @@ function applyFilters() {
       && (!filter.delay || item.delayDays > 0)
       && (!filter.overrun || item.contractDelta < 0 || item.finalEconomy < 0);
   });
+  registryPage = 1;
   sortStations();
   renderAll();
 }
@@ -393,7 +396,21 @@ function renderProblemList() {
 }
 
 function renderTable() {
-  document.querySelector("#stations-table").innerHTML = filteredStations.map(item => {
+  const total = filteredStations.length;
+  const pageCount = Math.max(1, Math.ceil(total / REGISTRY_PAGE_SIZE));
+  registryPage = Math.min(registryPage, pageCount);
+  const start = (registryPage - 1) * REGISTRY_PAGE_SIZE;
+  const visibleStations = filteredStations.slice(start, start + REGISTRY_PAGE_SIZE);
+
+  document.querySelector("#registry-count").textContent = `${formatNumber(total)} станций`;
+  document.querySelector("#registry-range").textContent = total
+    ? `Показано ${formatNumber(start + 1)}–${formatNumber(Math.min(start + REGISTRY_PAGE_SIZE, total))} из ${formatNumber(total)}`
+    : "По выбранным фильтрам станций нет";
+  document.querySelector("#registry-page").textContent = `${registryPage} / ${pageCount}`;
+  document.querySelector("#registry-prev").disabled = registryPage === 1;
+  document.querySelector("#registry-next").disabled = registryPage === pageCount;
+
+  document.querySelector("#stations-table").innerHTML = visibleStations.map(item => {
     const scheduleClass = item.delayDays > 0 ? "bad" : "done";
     return `<tr>
       <td><button class="station-link" type="button" data-id="${item.stationId}">${item.stationId}</button></td>
@@ -411,7 +428,7 @@ function renderTable() {
       <td>${badge(item.delayDays > 0 ? `${item.delayDays} дн.` : "В норме", scheduleClass)}</td>
       <td>${item.readiness}%</td>
     </tr>`;
-  }).join("");
+  }).join("") || `<tr><td class="table-empty" colspan="14">Нет станций по выбранным фильтрам. Сбросьте фильтры, чтобы увидеть весь реестр.</td></tr>`;
 }
 
 function badge(text, className) {
@@ -572,6 +589,17 @@ function bindEvents() {
     applyFilters();
   });
   document.querySelector("#export-button").addEventListener("click", exportCsv);
+  document.querySelector("#registry-prev").addEventListener("click", () => {
+    if (registryPage > 1) registryPage -= 1;
+    renderTable();
+    document.querySelector(".table-wrap").scrollTo({ top: 0, behavior: "smooth" });
+  });
+  document.querySelector("#registry-next").addEventListener("click", () => {
+    const pageCount = Math.max(1, Math.ceil(filteredStations.length / REGISTRY_PAGE_SIZE));
+    if (registryPage < pageCount) registryPage += 1;
+    renderTable();
+    document.querySelector(".table-wrap").scrollTo({ top: 0, behavior: "smooth" });
+  });
   document.querySelector("#file-input").addEventListener("change", event => {
     const file = event.target.files[0];
     if (file) parseUpload(file);
